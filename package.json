@@ -21,7 +21,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "verify": "pnpm lint:fix && pnpm format:check && pnpm typecheck && pnpm build"
   },
   "dependencies": {
     "cors": "^2.8.6",
@@ -40,9 +42,18 @@
     "eslint": "^10.14.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "pino-prettier": "3.0.1-dev",
     "prettier": "^3.10.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.2"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": "prettier --write"
   }
 }
